@@ -1,1 +1,133 @@
 
+Semana 14 – Manejo de Transacciones en SQL Server
+
+
+---
+
+📌 ¿Qué es una Transacción?
+
+Una transacción es un conjunto de una o varias operaciones SQL que se ejecutan como una unidad lógica.
+Esto significa que todas las operaciones se deben completar correctamente, o ninguna se aplica.
+
+> Si una parte falla, se deshace todo para mantener la consistencia de la base de datos.
+
+
+
+
+---
+
+🎯 Objetivo de las Transacciones
+
+Asegurar la integridad y consistencia de los datos durante operaciones como:
+
+Insertar
+
+Actualizar
+
+Eliminar
+
+
+
+---
+
+🔹 BEGIN TRANSACTION
+
+Inicia la transacción.
+Todo lo que se ejecute después queda pendiente hasta confirmarse.
+
+BEGIN TRANSACTION;
+
+
+---
+
+✅ COMMIT
+
+Confirma la transacción.
+Los cambios se vuelven permanentes en la base de datos.
+
+COMMIT;
+
+
+---
+
+❌ ROLLBACK
+
+Revierte la transacción.
+Los cambios se deshacen desde el último BEGIN TRANSACTION.
+
+ROLLBACK;
+
+
+---
+
+🧠 Ejemplo Práctico – Transferencia de Dinero
+
+BEGIN TRANSACTION;
+
+UPDATE Cuentas
+SET Saldo = Saldo - 100
+WHERE ID = 1;
+
+UPDATE Cuentas
+SET Saldo = Saldo + 100
+WHERE ID = 2;
+
+-- Si todo salió bien:
+COMMIT;
+
+-- Si hubo error:
+-- ROLLBACK;
+
+Explicación:
+
+Si ambas operaciones funcionan, la transacción se confirma.
+
+Si una falla, se usa ROLLBACK para regresar los datos al estado original.
+
+
+
+---
+
+🛡 Importancia de ROLLBACK
+
+Evita errores como:
+
+Saldos mal calculados
+
+Inconsistencias en registros
+
+Eliminaciones incompletas
+
+
+Garantiza que la base de datos no quede a medias.
+
+
+---
+
+🏁 SAVEPOINT (Opcional Avanzado)
+
+Permite establecer un punto de guardado dentro de la transacción para regresar parcialmente.
+
+SAVE TRANSACTION Punto1;
+ROLLBACK TRANSACTION Punto1;
+
+
+---
+
+🧠 Conclusión
+
+Comando	Función
+
+BEGIN TRANSACTION	Inicia la transacción
+COMMIT	Guarda los cambios definitivamente
+ROLLBACK	Revierte los cambios
+SAVEPOINT	Permite deshacer parcialmente
+
+
+Las transacciones aseguran la integridad, mantienen la coherencia de los datos y permiten recuperarse de errores sin afectar la base de datos.
+
+
+---
+
+¿Quieres ahora que te dé los scripts prácticos de transacciones usando AdventureWorksLT, igual que en clase?
+Responde: Sí y te los genero listos para copiar 😊
